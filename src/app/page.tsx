@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,16 +8,12 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80)",
-        }}
-      />
+      {/* Background - 使用渐变色替代外链图片，加载更快 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" />
+      {/* 添加纹理效果 */}
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 py-20">
         <motion.div
@@ -46,7 +43,11 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <Button variant="secondary">View Posts</Button>
+                <Button asChild variant="secondary">
+                  <Link href="http://rooftop.gitbaghero.local:3000">
+                    Go Rooftop
+                  </Link>
+                </Button>
                 <Button>Create Post</Button>
               </div>
             </CardContent>
