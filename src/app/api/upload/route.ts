@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_FILES = 9;
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+const UPLOAD_DIR = process.env.UPLOAD_DIR ?? "/data/uploads";
 const ALLOWED_MIME_TYPES = new Set([
   "image/jpeg",
   "image/png",
