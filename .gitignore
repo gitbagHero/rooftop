@@ -36,6 +36,10 @@ yarn-error.log*
 .env.*
 !.env.example
 
+# docker production config
+docker-compose.prod.yml
+docker-compose.override.yml
+
 # ide
 .vscode/
 .idea/
