@@ -4,13 +4,15 @@ import type { NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const host = req.headers.get("host") || "";
+  const pathname = url.pathname;
 
-  // 你本地开发时可能是 rooftop.localhost:3000
+  // 支持子域名 rooftop.* 或直接访问 /rooftop 路径
   const isRooftopSubdomain =
-    host.startsWith("rooftop.") || host.startsWith("rooftop.localhost");
+    host.startsWith("rooftop.") || 
+    host.startsWith("rooftop.localhost") ||
+    pathname.startsWith("/rooftop");
 
   // 跳过 Next.js 内部资源和静态资源
-  const pathname = url.pathname;
   const isApiRoute = pathname.startsWith("/api");
   const isAsset =
     pathname.startsWith("/_next") ||

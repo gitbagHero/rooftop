@@ -44,7 +44,7 @@ export default function Home() {
               </div>
               <div className="flex gap-3">
                 <Button asChild variant="secondary">
-                  <Link href="http://rooftop.gitbaghero.local:3000">
+                  <Link href="http://121.4.18.133:3000/rooftop">
                     Go Rooftop
                   </Link>
                 </Button>

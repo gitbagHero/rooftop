@@ -86,7 +86,7 @@ export async function POST(request: Request) {
 
       const bytes = await file.arrayBuffer();
       await fs.writeFile(targetPath, Buffer.from(bytes));
-      urls.push(`/uploads/${filename}`);
+      urls.push(`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/uploads/${filename}`);
     }
 
     return NextResponse.json({ urls });
