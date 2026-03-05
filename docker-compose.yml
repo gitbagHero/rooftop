@@ -1,21 +1,54 @@
 services:
+  # PostgreSQL 数据库
   postgres:
     image: postgres:16-alpine
     container_name: rooftop-postgres
     restart: unless-stopped
-    ports:
-      - '5432:5432'
     environment:
       POSTGRES_USER: rooftop
-      POSTGRES_PASSWORD: rooftop_dev_password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rooftop_secure_password}
       POSTGRES_DB: rooftop
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rooftop-network
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U rooftop']
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # Next.js 应用
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rooftop-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://rooftop:${POSTGRES_PASSWORD:-rooftop_secure_password}@postgres:5432/rooftop?schema=public
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-default-admin-token}
+    volumes:
+      # 挂载 uploads 目录到宿主机
+      - ./uploads:/app/public/uploads
+    networks:
+      - rooftop-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  rooftop-network:
+    driver: bridge
 
 volumes:
   postgres_data:
