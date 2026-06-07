@@ -4,8 +4,8 @@ RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
 # 复制依赖文件
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 # 构建阶段
 FROM node:20-alpine AS builder
@@ -16,11 +16,11 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # 生成 Prisma Client
-RUN npx prisma generate
+RUN corepack enable pnpm && pnpm exec prisma generate
 
 # 构建 Next.js 应用
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+RUN corepack enable pnpm && pnpm run build
 
 # 生产运行阶段
 FROM node:20-alpine AS runner

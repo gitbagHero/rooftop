@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -7,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito), var(--font-noto-sans-sc);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -48,38 +49,61 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.25);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.147 0.004 49.25);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
-  --accent: oklch(0.97 0.001 106.424);
-  --accent-foreground: oklch(0.216 0.006 56.043);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
-  --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.709 0.01 56.259);
+  --font-nunito: Nunito;
+  --font-noto-sans-sc: "Noto Sans SC";
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  --font-note-serif: "Noto Sans SC";
+  --radius: 18px;
+  --background: #f8f8f0;
+  --foreground: #794f27;
+  --card: rgb(247, 243, 223);
+  --card-foreground: #725d42;
+  --popover: rgb(247, 243, 223);
+  --popover-foreground: #725d42;
+  --primary: #19c8b9;
+  --primary-foreground: #794f27;
+  --secondary: #e6f9f6;
+  --secondary-foreground: #725d42;
+  --muted: #f0ece2;
+  --muted-foreground: #8a7b66;
+  --accent: #ffcc00;
+  --accent-foreground: #725d42;
+  --destructive: #e05a5a;
+  --border: #c4b89e;
+  --input: #c4b89e;
+  --ring: #ffcc00;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0.001 106.423);
-  --sidebar-foreground: oklch(0.147 0.004 49.25);
-  --sidebar-primary: oklch(0.216 0.006 56.043);
-  --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-accent: oklch(0.97 0.001 106.424);
-  --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-  --sidebar-border: oklch(0.923 0.003 48.717);
-  --sidebar-ring: oklch(0.709 0.01 56.259);
+  --sidebar: #f8f8f0;
+  --sidebar-foreground: #794f27;
+  --sidebar-primary: #19c8b9;
+  --sidebar-primary-foreground: #794f27;
+  --sidebar-accent: #e6f9f6;
+  --sidebar-accent-foreground: #725d42;
+  --sidebar-border: #c4b89e;
+  --sidebar-ring: #ffcc00;
+
+  --animal-primary: #19c8b9;
+  --animal-primary-hover: #3dd4c6;
+  --animal-primary-active: #11a89b;
+  --animal-primary-bg: #e6f9f6;
+  --animal-text: #794f27;
+  --animal-text-body: #725d42;
+  --animal-text-secondary: #9f927d;
+  --animal-text-muted: #8a7b66;
+  --animal-bg: #f8f8f0;
+  --animal-bg-content: rgb(247, 243, 223);
+  --animal-border: #c4b89e;
+  --animal-border-hover: #a89878;
+  --animal-success: #6fba2c;
+  --animal-warning: #f5c31c;
+  --animal-focus-yellow: #ffcc00;
+  --animal-focus-yellow-dark: #e0b800;
+  --animal-shadow-btn: #bdaea0;
 }
 
 .dark {
@@ -122,5 +146,33 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-nunito), var(--font-noto-sans-sc), -apple-system,
+      "PingFang SC", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  button,
+  a,
+  h1,
+  h2,
+  h3 {
+    letter-spacing: 0.02em;
+  }
+}
+
+@keyframes animal-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes animal-blink {
+  50% {
+    opacity: 0;
   }
 }

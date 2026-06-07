@@ -53,7 +53,7 @@ cd rooftop
 ### 3. 安装依赖
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 4. 配置环境变量
@@ -78,13 +78,13 @@ docker compose -f docker-compose.dev.yml up -d
 
 ```bash
 # 同步数据库结构
-npx prisma db push
+pnpm exec prisma db push
 
 # 或创建迁移文件
-npx prisma migrate dev --name init
+pnpm exec prisma migrate dev --name init
 
 # 生成 Prisma Client
-npx prisma generate
+pnpm exec prisma generate
 ```
 
 ### 7. 配置本地域名（可选）
@@ -99,7 +99,7 @@ npx prisma generate
 ### 8. 启动开发服务器
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 访问：
@@ -110,19 +110,19 @@ npm run dev
 
 ```bash
 # 启动开发服务器
-npm run dev
+pnpm run dev
 
 # 构建生产版本
-npm run build
+pnpm run build
 
 # 启动生产服务器
-npm start
+pnpm start
 
 # 代码检查
-npm run lint
+pnpm run lint
 
 # Prisma 可视化界面
-npx prisma studio
+pnpm exec prisma studio
 ```
 
 ## 生产环境部署
@@ -154,7 +154,7 @@ docker compose -f docker-compose.prod.yml down
 
 ```bash
 # 在容器内执行迁移
-docker compose -f docker-compose.prod.yml exec app npx prisma migrate deploy
+docker compose -f docker-compose.prod.yml exec app pnpm exec prisma migrate deploy
 ```
 
 ## 数据库管理
@@ -200,7 +200,7 @@ ports:
 如果遇到迁移冲突，可以重置数据库：
 
 ```bash
-npx prisma migrate reset --force
+pnpm exec prisma migrate reset --force
 ```
 
 ### 图片上传限制
