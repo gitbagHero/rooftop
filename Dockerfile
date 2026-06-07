@@ -41,9 +41,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# 复制 Prisma 文件
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+# 保留 Prisma schema；Prisma Client runtime 已由 Next standalone tracing 带入
 COPY --from=builder /app/prisma ./prisma
 
 # 创建 uploads 目录
